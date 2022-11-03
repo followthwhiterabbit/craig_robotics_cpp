@@ -46,11 +46,43 @@ std::array<std::array<double, 4>, 4> transform(std::array<int, 3> input_tuple, c
 
     if (frame == 'x')
     {
-        
+        transformation_matrix.at(0).at(0) = 1; 
+        transformation_matrix.at(0).at(1) = 0; 
+        transformation_matrix.at(0).at(2) = 0; 
+        transformation_matrix.at(0).at(3) = 0; 
+        transformation_matrix.at(1).at(0) = 0; 
+        transformation_matrix.at(1).at(1) = cos(angle * PI / 180.0); 
+        transformation_matrix.at(1).at(2) = -1* sin(angle * PI / 180.0); 
+        transformation_matrix.at(1).at(3) = location_1; 
+        transformation_matrix.at(2).at(0) = 0; 
+        transformation_matrix.at(2).at(1) = sin(angle * PI / 180.0); 
+        transformation_matrix.at(2).at(2) = cos(angle* PI / 180.0); 
+        transformation_matrix.at(2).at(3) = location_2; 
 
+        for(int i = 0; i < 3; i++)
+            transformation_matrix.at(3).at(i) = 0; 
+        transformation_matrix.at(3).at(3) = 1; 
+        
     }
     else if (frame == 'y')
     {
+        transformation_matrix.at(0).at(0) = cos(angle * PI / 180.0); 
+        transformation_matrix.at(0).at(1) = 0; 
+        transformation_matrix.at(0).at(2) = sin(angle * PI  / 180.0); 
+        transformation_matrix.at(0).at(3) = location_1; 
+        transformation_matrix.at(1).at(0) = 0; 
+        transformation_matrix.at(1).at(1) = 1; 
+        transformation_matrix.at(1).at(2) = 0; 
+        transformation_matrix.at(1).at(3) = 0; 
+        transformation_matrix.at(2).at(0) = -1 * sin(angle * PI / 180.0); 
+        transformation_matrix.at(2).at(1) = 0; 
+        transformation_matrix.at(2).at(2) = cos(angle * PI / 180.0); 
+        transformation_matrix.at(2).at(3) = location_2; 
+        
+        for(int i = 0; i < 3; i++)
+            transformation_matrix.at(3).at(i) = 0; 
+        transformation_matrix.at(3).at(3) = 1; 
+        
 
 
     }
@@ -71,9 +103,9 @@ std::array<std::array<double, 4>, 4> transform(std::array<int, 3> input_tuple, c
         transformation_matrix.at(2).at(2) = 1; 
         transformation_matrix.at(2).at(3) = 0; 
 
-        transformation_matrix.at(3).at(0) = 0; 
-        transformation_matrix.at(3).at(1) = 0; 
-        transformation_matrix.at(3).at(2) = 0; 
+
+        for(int i = 0; i < 3; i++)
+            transformation_matrix.at(3).at(i) = 0; 
         transformation_matrix.at(3).at(3) = 1; 
 
     }
