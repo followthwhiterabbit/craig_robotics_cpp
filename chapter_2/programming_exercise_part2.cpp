@@ -31,6 +31,68 @@ Procedure ITOU(VAR iform: frame, VAR uform: vec3);
 
 #define PI 3.141592
 
+std::array<std::array<double, 4>, 4> multiply_transform(std::array<std::array<double, 4>, 4> t1, std::array<std::array<double, 4>, 4> t2)
+{
+    std::array<std::array<double, 4>, 4> transformed_matrix; 
+    std::array<double, 3> relative_position_between_frames; 
+
+
+    // when we multiply two transormation matrices, the format of matrix multiplication is as follows:
+    
+    for(int i = 0; i < 4; i++)
+        for(int j = 0; j < 4; j++)
+            transformed_matrix.at(i).at(j) = 0.0; 
+            
+
+    for(int i = 0; i < 3; i++)
+    {
+        for(int j = 0; j < 3; j++)
+        {
+            for(int k = 0; k < 3; k++)
+                transformed_matrix.at(i).at(j) += t1.at(i).at(k) * t2.at(k).at(j); 
+
+        }
+
+    }
+
+    for(int i = 0; i < 3; i++)
+    {
+        for(int j = 0;  j < 3; j++)
+            {
+                transformed_matrix.at(i).at(3) = transformed_matrix.at(i).at(j) * t2.at(i).at(1) + t1.at(i).at(3); 
+                
+
+
+            }
+
+
+
+    }
+
+
+
+
+
+
+    for(int i = 0; i < 3; i++)
+        transformed_matrix.at(3).at(i) = 0.0; 
+
+    transformed_matrix.at(3).at(3) = 1.0; 
+
+
+
+
+
+
+
+
+
+return transformed_matrix; 
+
+
+}
+
+
 
 
 // we receive x and y coordinates and the degree as an angle 
@@ -128,12 +190,15 @@ int main()
 {
 
 std::array<std::array<double, 4>, 4> transformation_matrix; 
+std::array<std::array<double, 4>, 4> transformation_matrix_2; 
+std::array<std::array<double, 4>, 4> multiplied_matrix; 
 
 char frame; 
+char frame2; 
 
 
 std::array<int, 3> input_tuple; // input tuple with x, y and theta 
-
+std::array<int, 3> input_tuple_2; // second tuple
 
 std::cout << "insert the parameters of the transformation: (x, y, theta(in degrees))\n"; 
 
@@ -148,6 +213,8 @@ std::cin >> frame;
 transformation_matrix = transform(input_tuple, frame); 
 
 
+
+
 for(int i = 0; i < 4; i++)
     {
        for(int j = 0; j < 4; j++)
@@ -157,6 +224,37 @@ for(int i = 0; i < 4; i++)
             
     std::cout << std::endl; 
     }
+
+
+std::cout << "insert the parameters of the second transformation: (x, y, theta)\n"; 
+
+
+for(int i = 0; i < input_tuple_2.size(); i++)
+    std::cin >> input_tuple_2.at(i); 
+
+std::cout << "insert the rotation of the frame around the axis: (x, y, z): \n"; 
+std::cin >> frame2;  
+
+transformation_matrix_2 = transform(input_tuple_2, frame2); 
+
+
+multiplied_matrix = multiply_transform(transformation_matrix, transformation_matrix_2);
+
+
+
+
+
+for(int i = 0; i < 4; i++)
+    {
+       for(int j = 0; j < 4; j++)
+        {
+            std::cout << std::setw(7) << std::setprecision(3) <<  multiplied_matrix[i][j] << " "; 
+        }
+            
+    std::cout << std::endl; 
+    }
+
+
 
 
 
