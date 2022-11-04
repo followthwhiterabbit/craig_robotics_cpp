@@ -59,12 +59,10 @@ std::array<std::array<double, 4>, 4> multiply_transform(std::array<std::array<do
     {
         for(int j = 0;  j < 3; j++)
             {
-                transformed_matrix.at(i).at(3) = transformed_matrix.at(i).at(j) * t2.at(i).at(1) + t1.at(i).at(3); 
-                
-
+                transformed_matrix.at(i).at(3) += t1.at(i).at(j) * t2.at(j).at(3);  
 
             }
-
+        transformed_matrix.at(i).at(3) += t2.at(i).at(3); 
 
 
     }
@@ -236,6 +234,21 @@ std::cout << "insert the rotation of the frame around the axis: (x, y, z): \n";
 std::cin >> frame2;  
 
 transformation_matrix_2 = transform(input_tuple_2, frame2); 
+
+
+for(int i = 0; i < 4; i++)
+    {
+       for(int j = 0; j < 4; j++)
+        {
+            std::cout << std::setw(7) << std::setprecision(3) <<  transformation_matrix_2[i][j] << " "; 
+        }
+            
+    std::cout << std::endl; 
+    }
+
+    std::cout << std::endl; 
+
+
 
 
 multiplied_matrix = multiply_transform(transformation_matrix, transformation_matrix_2);
