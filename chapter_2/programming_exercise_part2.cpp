@@ -41,6 +41,42 @@ Procedure TINVERT(VAR brela, arelb: frame); // takes b relative to a and returns
 #define PI 3.141592
 
 
+std::array<std::array<double, 4>, 4> invert_transform(std::array<std::array<double, 4>, 4> t1)
+{
+    std::array<std::array<double, 4>, 4> inverted_transform; 
+
+    for(int i = 0 ; i < 3; i++)
+        inverted_transform.at(3).at(i) = 0.0; 
+    inverted_transform.at(3).at(3) = 1.0; 
+
+    for(int i = 0; i < 3; i++)
+    {
+        for(int j = 0; j < 3; j++)
+            {   
+                inverted_transform.at(i).at(j) = t1.at(j).at(i); 
+                
+            }
+    }
+
+     for(int i = 0; i < 3; i++)
+    {
+        for(int j = 0;  j < 3; j++)
+            {
+                inverted_transform.at(i).at(3) += -1 * t1.at(i).at(j) * t1.at(j).at(3);  
+
+            }
+    }
+
+return inverted_transform; 
+ 
+    
+}
+
+
+
+
+
+
 std::array<std::array<double, 4>, 4> multiply_transform(std::array<std::array<double, 4>, 4> t1, std::array<std::array<double, 4>, 4> t2)
 {
     std::array<std::array<double, 4>, 4> transformed_matrix; 
@@ -192,7 +228,7 @@ int main()
 std::array<std::array<double, 4>, 4> transformation_matrix; 
 std::array<std::array<double, 4>, 4> transformation_matrix_2; 
 std::array<std::array<double, 4>, 4> multiplied_matrix; 
-
+std::array<std::array<double, 4>, 4> inverted_matrix; 
 char frame; 
 char frame2; 
 
@@ -268,6 +304,25 @@ for(int i = 0; i < 4; i++)
             
     std::cout << std::endl; 
     }
+
+    std::cout << std::endl; 
+
+    inverted_matrix = invert_transform(transformation_matrix); 
+
+    std::cout << "inverted matrix is: " << std::endl; 
+
+for(int i = 0; i < 4; i++)
+    {
+       for(int j = 0; j < 4; j++)
+        {
+            std::cout << std::setw(7) << std::setprecision(3) <<  inverted_matrix[i][j] << " "; 
+        }
+            
+    std::cout << std::endl; 
+    }
+
+
+
 
 
 
