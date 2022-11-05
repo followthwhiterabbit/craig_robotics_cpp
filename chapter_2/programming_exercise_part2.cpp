@@ -24,9 +24,12 @@ Write a subroutine to invert a transform. Use the following procedure heading:
 
 Procedure TINVERT(VAR brela, arelb: frame); // takes b relative to a and returns a relative to b 
 
+These frames are input in the user representation [x, y, theta] (where theta is in degrees).
 
-
-
+Draw a frame diagram (like Fig. 2.15, only in 2-D) that qualitatively shows their
+arrangement. Write a program that calls TMIJLT and TINVERT (defined in
+programming exercises 3 and 4) as many times as needed to solve for T. Then
+print out T in both internal and user representation.
 
 
 
