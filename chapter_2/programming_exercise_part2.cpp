@@ -20,6 +20,15 @@ The inverse routine will also be necessary :
 Procedure ITOU(VAR iform: frame, VAR uform: vec3); 
 
 
+Write a subroutine to invert a transform. Use the following procedure heading: 
+
+Procedure TINVERT(VAR brela, arelb: frame); // takes b relative to a and returns a relative to b 
+
+
+
+
+
+
 
 */
 
@@ -30,6 +39,7 @@ Procedure ITOU(VAR iform: frame, VAR uform: vec3);
 #include <array>
 
 #define PI 3.141592
+
 
 std::array<std::array<double, 4>, 4> multiply_transform(std::array<std::array<double, 4>, 4> t1, std::array<std::array<double, 4>, 4> t2)
 {
@@ -70,18 +80,10 @@ std::array<std::array<double, 4>, 4> multiply_transform(std::array<std::array<do
 
 
 
-
-
     for(int i = 0; i < 3; i++)
         transformed_matrix.at(3).at(i) = 0.0; 
 
     transformed_matrix.at(3).at(3) = 1.0; 
-
-
-
-
-
-
 
 
 
