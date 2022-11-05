@@ -1,6 +1,6 @@
 # Robotics Programming Solutions 
 
-## Implementation of the programming exercises in John J.Craig's Introduction to Robotics Mechanics and Control 
+## Implementation of the programming exercises in John J.Craig's Introduction to Robotics Mechanics and Control book
 
 <img src="https://0.academia-photos.com/attachment_thumbnails/63755643/mini_magick20200627-11000-19dqjmr.png?1593249817" width="300" height="400">
 
